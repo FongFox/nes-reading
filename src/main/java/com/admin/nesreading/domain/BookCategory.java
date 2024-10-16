@@ -21,6 +21,7 @@ public class BookCategory {
   private long id;
 
   private String name;
+  private String description;
 
   @CreationTimestamp
   private LocalDateTime createAt;
