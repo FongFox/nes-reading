@@ -2,6 +2,7 @@ package com.admin.nesreading.controller.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -12,23 +13,38 @@ public class BookController {
     return "book/view";
   }
 
-  @GetMapping("/create")
+  @GetMapping("create")
   public String getBookCreatePage() {
     return "book/create";
   }
 
-  @GetMapping("/{id}")
+  @PostMapping("create")
+  public String handleCreateBook() {
+    return "redirect:/book/view";
+  }
+
+  @GetMapping("{id}")
   public String getBookDetailPage() {
     return "book/detail";
   }
 
-  @GetMapping("/update/{id}")
+  @GetMapping("update/{id}")
   public String getBookUpdatePage() {
     return "book/update";
   }
 
-  @GetMapping("/delete/{id}")
+  @PostMapping("update/{id}")
+  public String handleUpdateBook() {
+    return "redirect:/book/view";
+  }
+
+  @GetMapping("delete/{id}")
   public String getBookDetelePage() {
     return "book/delete";
+  }
+
+  @PostMapping("delete/{id}")
+  public String handleDeteleBook() {
+    return "redirect:/book/view";
   }
 }
