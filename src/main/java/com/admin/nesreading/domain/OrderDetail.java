@@ -24,12 +24,6 @@ public class OrderDetail {
 
   private double price;
 
-  // @CreationTimestamp
-  // private LocalDateTime createAt;
-
-  // @UpdateTimestamp
-  // private LocalDateTime updateAt;
-
   @ManyToOne()
   @JoinColumn(name = "book_id")
   private Book book;
