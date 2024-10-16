@@ -46,7 +46,7 @@ public class Book {
   private BookCategory bookCategory;
 
   @OneToMany(mappedBy = "book")
-  private List<BookAuthor> bookAuthors;
+  private List<Author> authors;
 
   @OneToMany(mappedBy = "book")
   private List<CartDetail> cartDetails;
