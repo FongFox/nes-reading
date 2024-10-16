@@ -23,7 +23,7 @@ public class Author {
   private long id;
 
   private String name;
-  private String bio;
+  private String biography;
 
   @CreationTimestamp
   private LocalDateTime createAt;
