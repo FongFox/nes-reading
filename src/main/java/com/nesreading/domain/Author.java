@@ -16,13 +16,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "author")
+@Table(name = "authors")
 public class Author {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  private String name;
+  private String fullName;
+  private String shortDescription;
 
   @CreationTimestamp
   private LocalDateTime createAt;

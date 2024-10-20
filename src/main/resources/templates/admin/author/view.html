@@ -23,21 +23,22 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Users Management</h1>
+          <h1 class="mt-4">Authors Management</h1>
+          <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
-              <a th:href="@{/}">Dashboard</a>
+              <a th:href="@{/admin}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">View Users</li>
+            <li class="breadcrumb-item active">View Authors</li>
           </ol>
 
           <div class="mt-5">
             <div class="row">
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
-                  <h3>Table Users</h3>
-                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/users/create}">
-                    Add New User
+                  <h3>Table Authors</h3>
+                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/books/create}">
+                    Add New Author
                   </a>
                 </div>
                 <hr />
@@ -45,62 +46,37 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Role</th>
                       <th scope="col">Full Name</th>
                       <th scope="col">Email</th>
+                      <th scope="col">Short Description</th>
                       <th scope="col" colspan="3">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:if="${userList.isEmpty()}">
-                      <td colspan="8">Nothing in this list!</td>
-                    </tr>
-
-                    <tr th:each="user : ${userList}">
-                      <td th:text="${user.id}"></td>
-                      <td th:text="${user.role}"></td>
-                      <td th:text="${user.fullName}"></td>
-                      <td th:text="${user.email}"></td>
-                      <td>
-                        <a th:href="@{/admin/users/{id}(id=${user.id})}" type="button" class="btn btn-outline-success">
-                          View
-                        </a>
-                      </td>
-                      <td>
-                        <a th:href="@{/admin/users/update/{id}(id=${user.id})}" type="button" class="btn btn-outline-warning">
-                          Update
-                        </a>
-                      </td>
-                      <td>
-                        <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" type="button" class="btn btn-outline-danger">
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-
-                    <!-- <tr>
+                    <tr>
                       <td>1</td>
-                      <td>User 1</td>
-                      <td>user1@nesreading.com</td>
-                      <td>84987654321</td>
-                      <td>1600 Pennsylvania Avenue NW, Washington, D.C. 20500, USA</td>
+                      <td>Book title</td>
+                      <td>Book author</td>
+                      <td>Book Publisher</td>
+                      <td>This is book short description.</td>
+                      <td>10.000 VND</td>
+                      <td>10</td>
                       <td>
-                        <a th:href="@{/admin/users/1}" type="button" class="btn btn-outline-success">
+                        <a th:href="@{/admin/books/1}" type="button" class="btn btn-outline-success">
                           View
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/admin/users/update/1}" type="button" class="btn btn-outline-warning">
+                        <a th:href="@{/admin/books/update/1}" type="button" class="btn btn-outline-warning">
                           Update
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/admin/users/delete/1}" type="button" class="btn btn-outline-danger">
+                        <a th:href="@{/admin/books/delete/1}" type="button" class="btn btn-outline-danger">
                           Delete
                         </a>
                       </td>
-                    </tr> -->
-
+                    </tr>
                   </tbody>
                 </table>
               </div>

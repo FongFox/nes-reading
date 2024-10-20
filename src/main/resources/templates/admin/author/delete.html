@@ -23,34 +23,33 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Users Management</h1>
-          <!-- Breadcrumb -->
+          <h1 class="mt-4">Books Management</h1>
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
               <a th:href="@{/admin}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-              <a th:href="@{/admin/users}">View Users</a>
+              <a th:href="@{/admin/books}">View Books</a>
             </li>
-            <li class="breadcrumb-item active">User Detail</li>
+            <li class="breadcrumb-item active">Book Detail</li>
           </ol>
 
           <div class="mt-5">
             <div class="row">
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
-                  <h3>Delete User</h3>
+                  <h3>Delete Product with id = 1</h3>
                 </div>
                 <hr />
                 <div class="alert alert-danger" role="alert">
-                  Are you sure want to delete this user ?
+                  Are you sure want to delete this product ?
                 </div>
-                <form method="post" th:action="@{/admin/users/delete}" th:object="${tempUser}">
+                <form>
                   <div class="mb-3 d-none">
                     <label class="form-label">Id:</label>
-                    <input type="text" class="form-control" th:field="*{id}" />
+                    <input value="1" type="text" class="form-control" path="id" />
                   </div>
-                  <a class="btn btn-outline-success" th:href="@{/admin/users}" role="button">Return</a>
+                  <a class="btn btn-outline-success" th:href="@{/admin/books}" role="button">Back</a>
                   <button type="submit" class="btn btn-outline-danger">Delete</button>
                 </form>
               </div>
