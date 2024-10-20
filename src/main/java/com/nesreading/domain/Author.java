@@ -22,7 +22,8 @@ public class Author {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  private String name;
+  private String fullName;
+  private String shortDescription;
 
   @CreationTimestamp
   private LocalDateTime createAt;
