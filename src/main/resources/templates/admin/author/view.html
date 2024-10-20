@@ -23,21 +23,22 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Books Management</h1>
+          <h1 class="mt-4">Authors Management</h1>
+          <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
               <a th:href="@{/admin}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">View Books</li>
+            <li class="breadcrumb-item active">View Authors</li>
           </ol>
 
           <div class="mt-5">
             <div class="row">
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
-                  <h3>Table Books</h3>
+                  <h3>Table Authors</h3>
                   <a type="button" class="btn btn-outline-primary" th:href="@{/admin/books/create}">
-                    Add New Book
+                    Add New Author
                   </a>
                 </div>
                 <hr />
@@ -45,12 +46,9 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Author</th>
-                      <th scope="col">Publisher</th>
+                      <th scope="col">Full Name</th>
+                      <th scope="col">Email</th>
                       <th scope="col">Short Description</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Stock</th>
                       <th scope="col" colspan="3">Action</th>
                     </tr>
                   </thead>

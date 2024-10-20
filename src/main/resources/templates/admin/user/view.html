@@ -36,7 +36,7 @@
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
                   <h3>Table Users</h3>
-                  <a type="button" class="btn btn-outline-primary" th:href="@{/users/create}">
+                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/users/create}">
                     Add New User
                   </a>
                 </div>
@@ -45,36 +45,62 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
+                      <th scope="col">Role</th>
                       <th scope="col">Full Name</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Phone Number</th>
-                      <th scope="col">Address</th>
                       <th scope="col" colspan="3">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr th:if="${userList.isEmpty()}">
+                      <td colspan="8">Nothing in this list!</td>
+                    </tr>
+
+                    <tr th:each="user : ${userList}">
+                      <td th:text="${user.id}"></td>
+                      <td th:text="${user.role}"></td>
+                      <td th:text="${user.fullName}"></td>
+                      <td th:text="${user.email}"></td>
+                      <td>
+                        <a th:href="@{/admin/users/{id}(id=${user.id})}" type="button" class="btn btn-outline-success">
+                          View
+                        </a>
+                      </td>
+                      <td>
+                        <a th:href="@{/admin/users/update/{id}(id=${user.id})}" type="button" class="btn btn-outline-warning">
+                          Update
+                        </a>
+                      </td>
+                      <td>
+                        <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" type="button" class="btn btn-outline-danger">
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+
+                    <!-- <tr>
                       <td>1</td>
                       <td>User 1</td>
                       <td>user1@nesreading.com</td>
                       <td>84987654321</td>
                       <td>1600 Pennsylvania Avenue NW, Washington, D.C. 20500, USA</td>
                       <td>
-                        <a th:href="@{/users/1}" type="button" class="btn btn-outline-success">
+                        <a th:href="@{/admin/users/1}" type="button" class="btn btn-outline-success">
                           View
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/users/update/1}" type="button" class="btn btn-outline-warning">
+                        <a th:href="@{/admin/users/update/1}" type="button" class="btn btn-outline-warning">
                           Update
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/users/delete/1}" type="button" class="btn btn-outline-danger">
+                        <a th:href="@{/admin/users/delete/1}" type="button" class="btn btn-outline-danger">
                           Delete
                         </a>
                       </td>
-                    </tr>
+                    </tr> -->
+
                   </tbody>
                 </table>
               </div>

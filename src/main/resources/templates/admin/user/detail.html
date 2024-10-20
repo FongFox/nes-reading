@@ -24,12 +24,13 @@
       <main>
         <div class="container-fluid px-4">
           <h1 class="mt-4">Users Management</h1>
+          <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
-              <a th:href="@{/}">Dashboard</a>
+              <a th:href="@{/admin}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-              <a th:href="@{/users}">View Users</a>
+              <a th:href="@{/admin/users}">View Users</a>
             </li>
             <li class="breadcrumb-item active">Users Detail</li>
           </ol>
@@ -48,42 +49,37 @@
                   <div class="card-header">
                     User Information
                   </div>
-                  <ul class="list-group list-group-flush">
+
+                  <ul class="list-group list-group-flush" th:if="${user == null}">
                     <li class="list-group-item d-none">
-                      Id: 1
-                    </li>
-                    <li class="list-group-item">
-                      Full Name: User 1
-                    </li>
-                    <li class="list-group-item">
-                      Role: Male
-                    </li>
-                    <li class="list-group-item">
-                      Email: user1@nesreading.com
-                    </li>
-                    <li class="list-group-item">
-                      Phone Number: 84987654321
-                    </li>
-                    <li class="list-group-item">
-                      Address: 1600 Pennsylvania Avenue NW, Washington, D.C. 20500, USA
-                    </li>
-                    <li class="list-group-item">
-                      Occupation: Business
-                    </li>
-                    <li class="list-group-item">
-                      Customer Segmentation: Premium
-                    </li>
-                    </li>
-                    <li class="list-group-item">
-                      Number of Books Purchased: 1000
-                    </li>
-                    <li class="list-group-item">
-                      Password: 123456789
+                      Nothing in here!
                     </li>
                   </ul>
+
+                  <ul class="list-group list-group-flush" th:if="${user != null}">
+                    <li class="list-group-item d-none">
+                      Id: <span th:text="${user.id}"></span>
+                    </li>
+                    <li class="list-group-item">
+                      Full Name: <span th:text="${user.fullName}"></span>
+                    </li>
+                    <li class="list-group-item">
+                      Role: <span th:text="${user.role}"></span>
+                    </li>
+                    <li class="list-group-item">
+                      Email: <span th:text="${user.email}"></span>
+                    </li>
+                    <li class="list-group-item">
+                      Phone Number: <span th:text="${user.phoneNumber}"></span>
+                    </li>
+                    <li class="list-group-item">
+                      Address: <span th:text="${user.address}"></span>
+                    </li>
+                  </ul>
+
                 </div>
                 <div class="mt-3 mb-3">
-                  <a th:href="@{/users}" type="button" class="btn btn-outline-success">
+                  <a th:href="@{/admin/users}" type="button" class="btn btn-outline-success">
                     Back
                   </a>
                 </div>
