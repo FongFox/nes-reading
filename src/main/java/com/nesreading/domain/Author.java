@@ -33,4 +33,60 @@ public class Author {
 
   @OneToMany(mappedBy = "author")
   private List<BookAuthor> bookAuthors;
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
+
+  public String getShortDescription() {
+    return shortDescription;
+  }
+
+  public void setShortDescription(String shortDescription) {
+    this.shortDescription = shortDescription;
+  }
+
+  public LocalDateTime getCreateAt() {
+    return createAt;
+  }
+
+  public void setCreateAt(LocalDateTime createAt) {
+    this.createAt = createAt;
+  }
+
+  public LocalDateTime getUpdateAt() {
+    return updateAt;
+  }
+
+  public void setUpdateAt(LocalDateTime updateAt) {
+    this.updateAt = updateAt;
+  }
+
+  public List<BookAuthor> getBookAuthors() {
+    return bookAuthors;
+  }
+
+  public void setBookAuthors(List<BookAuthor> bookAuthors) {
+    this.bookAuthors = bookAuthors;
+  }
+
+  @Override
+  public String toString() {
+    return "Author [id=" + id + ", fullName=" + fullName + ", shortDescription=" + shortDescription + ", createAt="
+        + createAt + ", updateAt=" + updateAt + ", bookAuthors=" + bookAuthors + "]";
+  }
+
+  
 }

@@ -38,18 +38,18 @@
             <div class="row">
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
-                  <h3>Delete Product with id = 1</h3>
+                  <h3>Delete Author</h3>
                 </div>
                 <hr />
                 <div class="alert alert-danger" role="alert">
-                  Are you sure want to delete this product ?
+                  Are you sure want to delete this author ?
                 </div>
-                <form>
+                <form method="post" th:action="@{/admin/authors/delete}" th:object="${tempAuthor}">
                   <div class="mb-3 d-none">
                     <label class="form-label">Id:</label>
-                    <input value="1" type="text" class="form-control" path="id" />
+                    <input type="text" class="form-control" th:field="*{id}" />
                   </div>
-                  <a class="btn btn-outline-success" th:href="@{/admin/books}" role="button">Back</a>
+                  <a class="btn btn-outline-success" th:href="@{/admin/authors}" role="button">Back</a>
                   <button type="submit" class="btn btn-outline-danger">Delete</button>
                 </form>
               </div>

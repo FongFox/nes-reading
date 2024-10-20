@@ -37,7 +37,7 @@
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
                   <h3>Table Authors</h3>
-                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/books/create}">
+                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/authors/create}">
                     Add New Author
                   </a>
                 </div>
@@ -47,13 +47,33 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Full Name</th>
-                      <th scope="col">Email</th>
                       <th scope="col">Short Description</th>
-                      <th scope="col" colspan="3">Action</th>
+                      <th scope="col" colspan="2">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+
+                    <tr th:if="${authorList == null or authorList.isEmpty()}">
+                      <td colspan="8">Nothing in this list!</td>
+                    </tr>
+
+                    <tr th:each="author : ${authorList}">
+                      <td th:text="${author.id}"></td>
+                      <td th:text="${author.fullName}"></td>
+                      <td th:text="${author.shortDescription}"></td>
+                      <td>
+                        <a th:href="@{/admin/authors/update/{id}(id=${author.id})}" type="button" class="btn btn-outline-warning">
+                          Update
+                        </a>
+                      </td>
+                      <td>
+                        <a th:href="@{/admin/authors/delete/{id}(id=${author.id})}" type="button" class="btn btn-outline-danger">
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+
+                    <!-- <tr>
                       <td>1</td>
                       <td>Book title</td>
                       <td>Book author</td>
@@ -62,21 +82,22 @@
                       <td>10.000 VND</td>
                       <td>10</td>
                       <td>
-                        <a th:href="@{/admin/books/1}" type="button" class="btn btn-outline-success">
+                        <a th:href="@{/admin/authors/1}" type="button" class="btn btn-outline-success">
                           View
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/admin/books/update/1}" type="button" class="btn btn-outline-warning">
+                        <a th:href="@{/admin/authors/update/1}" type="button" class="btn btn-outline-warning">
                           Update
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/admin/books/delete/1}" type="button" class="btn btn-outline-danger">
+                        <a th:href="@{/admin/authors/delete/1}" type="button" class="btn btn-outline-danger">
                           Delete
                         </a>
                       </td>
-                    </tr>
+                    </tr> -->
+
                   </tbody>
                 </table>
               </div>
