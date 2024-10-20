@@ -13,15 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nesreading.domain.Author;
 import com.nesreading.domain.User;
+import com.nesreading.service.AuthorService;
 import com.nesreading.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
+    private final AuthorService authorService;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, AuthorService authorService) {
         this.userService = userService;
+        this.authorService = authorService;
     }
 
     // =============================== (Start) Dashboard Controller =====================================
@@ -54,7 +57,6 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
-
     @GetMapping("/users/{id}")
     public String getUserDetailPage(@PathVariable long id ,Model model) {
         User user = this.userService.handleFetchUserById(id).orElse(null);
@@ -70,9 +72,7 @@ public class AdminController {
         if(user == null) {
             return "redirect:/admin/users";
         }
-
         model.addAttribute("tempUser", user);
-
         return "admin/user/update";
     }
 
@@ -103,15 +103,57 @@ public class AdminController {
 
     // =============================== (Start) Author Controller =====================================
     @GetMapping("/authors")
-    public String getAuthorViewPage() {
+    public String getAuthorViewPage(Model model) {
+        List<Author> authorList = authorService.handleFetchAllAuthors();
+
+        model.addAttribute("authorList", authorList);
+
         return "admin/author/view";
     }
 
     @GetMapping("/authors/create")
     public String getAuthorCreatePage(Model model) {
         model.addAttribute("newAuthor", new Author());
-
         return "admin/author/create";
+    }
+
+    @PostMapping("/authors/create")
+    public String handleCreateAuthor(@ModelAttribute("tempAuthor") Author author) {
+        // System.out.println(author.toString());
+        authorService.handleCreateUser(author);
+        return "redirect:/admin/authors";
+    }
+
+    @GetMapping("/authors/update/{id}")
+    public String getAuthorUpdatePage(@PathVariable long id ,Model model) {
+        Author author = authorService.handleFetchAuthorById(id).orElse(null);
+        if(author == null) {
+            return "redirect:/admin/authors";
+        }
+        model.addAttribute("tempAuthor", author);
+        return "admin/author/update";
+    }
+
+    @PostMapping("/authors/update")
+    public String handleUpdateAuthor(@ModelAttribute("tempAuthor") Author author) {
+        authorService.handleUpdateAuthor(author);
+        return "redirect:/admin/authors";
+    }
+
+    @GetMapping("/authors/delete/{id}")
+    public String getAuthorDeletePage(@PathVariable long id ,Model model) {
+        Author author = authorService.handleFetchAuthorById(id).get();
+        if(author == null) {
+            return "redirect:/admin/authors";
+        }
+        model.addAttribute("tempAuthor", author);
+        return "admin/author/delete";
+    }
+
+    @PostMapping("/authors/delete")
+    public String handleDeleteAuthor(@ModelAttribute("tempAuthor") Author author) {
+        authorService.handleDeleteAuthor(author.getId());
+        return "redirect:/admin/authors";
     }
     // =============================== (End) Author Controller =======================================
 

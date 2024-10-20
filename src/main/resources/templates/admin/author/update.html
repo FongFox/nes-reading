@@ -23,69 +23,36 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Books Management</h1>
+          <h1 class="mt-4">Authors Management</h1>
+          <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
-              <a href="/admin">Dashboard</a>
+              <a th:href="@{/admin}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="/admin/books">View Books</a>
+              <a th:href="@{/admin/authors}">View Authors</a>
             </li>
-            <li class="breadcrumb-item active">Update Book</li>
+            <li class="breadcrumb-item active">Update Author</li>
           </ol>
 
           <div class="mt-5">
             <div class="row">
               <div class="col-md-6 col-12 mx-auto">
-                <h3>Update new Book</h3>
+                <h3>Update Author</h3>
                 <hr />
-                <form class="row">
+                <form class="row" method="post" th:action="@{/admin/authors/update}" th:object="${tempAuthor}">
 
-                  <div class="mb-3 col-12 col-md-12">
-                    <label class="form-label">Title:</label>
-                    <input type="text" class="form-control" path="title" />
+                  <div class="mb-3 col-12 col-md-12 d-none">
+                    <label class="form-label">Id:</label>
+                    <input type="text" class="form-control" th:field="*{id}" />
                   </div>
                   <div class="mb-3 col-12 col-md-12">
-                    <label class="form-label">Author:</label>
-                    <input type="text" class="form-control" path="author" />
-                  </div>
-                  <div class="mb-3 col-12 col-md-8">
-                    <label class="form-label">Publisher:</label>
-                    <input type="text" class="form-control" path="price" />
-                  </div>
-                  <div class="mb-3 col-12 col-md-4">
-                    <label class="form-label">Publication Year:</label>
-                    <input type="number" class="form-control" path="stock" />
+                    <label class="form-label">Full Name:</label>
+                    <input type="text" class="form-control" th:field="*{fullName}" />
                   </div>
                   <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Short Description:</label>
-                    <input type="text" class="form-control" path="shortDesc" />
-                  </div>
-                  <div class="mb-3 col-12">
-                    <label class="form-label">Detail Description:</label>
-                    <textarea type="text" class="form-control" path="detailDesc"></textarea>
-                  </div>
-                  <div class="mb-3 col-12 col-md-6">
-                    <label class="form-label">Price:</label>
-                    <input type="number" class="form-control" path="stock" />
-                  </div>
-                  <div class="mb-3 col-12 col-md-6">
-                    <label class="form-label">Stock:</label>
-                    <input type="number" class="form-control" path="stock" />
-                  </div>
-                  <div class="mb-3 col-12 col-md-6">
-                    <label class="form-label">Book Categories:</label>
-                    <select class="form-select" path="factory">
-                      <option value="FICTION">Fiction</option>
-                      <option value="NONFICTION">Non-Fiction</option>
-                      <option value="SCIENCE">Science</option>
-                      <option value="HISTORY">History</option>
-                      <option value="BIOGRAPHY">Biography</option>
-                      <option value="CHILDREN">Children's Books</option>
-                      <option value="BUSINESS">Business</option>
-                      <option value="HEALTH">Health</option>
-                      <option value="RELIGION">Religion</option>
-                    </select>
+                    <input type="text" class="form-control" th:field="*{shortDescription}" />
                   </div>
 
                   <!-- <div class="mb-3 col-12 col-md-6">
@@ -104,7 +71,7 @@
                   </div>
                   <div class="mt-3 mb-5 col-12">
                     <div class="d-grid">
-                      <a class="btn btn-outline-success" th:href="@{/admin/books}" role="button">Back</a>
+                      <a class="btn btn-outline-success" th:href="@{/admin/authors}" role="button">Back</a>
                     </div>
                   </div>
 

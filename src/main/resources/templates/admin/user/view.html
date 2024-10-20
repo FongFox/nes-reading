@@ -52,7 +52,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:if="${userList.isEmpty()}">
+                    <tr th:if="${userList == null or userList.isEmpty()}">
                       <td colspan="8">Nothing in this list!</td>
                     </tr>
 
@@ -77,29 +77,6 @@
                         </a>
                       </td>
                     </tr>
-
-                    <!-- <tr>
-                      <td>1</td>
-                      <td>User 1</td>
-                      <td>user1@nesreading.com</td>
-                      <td>84987654321</td>
-                      <td>1600 Pennsylvania Avenue NW, Washington, D.C. 20500, USA</td>
-                      <td>
-                        <a th:href="@{/admin/users/1}" type="button" class="btn btn-outline-success">
-                          View
-                        </a>
-                      </td>
-                      <td>
-                        <a th:href="@{/admin/users/update/1}" type="button" class="btn btn-outline-warning">
-                          Update
-                        </a>
-                      </td>
-                      <td>
-                        <a th:href="@{/admin/users/delete/1}" type="button" class="btn btn-outline-danger">
-                          Delete
-                        </a>
-                      </td>
-                    </tr> -->
 
                   </tbody>
                 </table>
