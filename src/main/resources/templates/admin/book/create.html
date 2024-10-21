@@ -24,12 +24,13 @@
       <main>
         <div class="container-fluid px-4">
           <h1 class="mt-4">Books Management</h1>
+          <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
-              <a href="/">Dashboard</a>
+              <a th:href="@{/}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="/books">View Books</a>
+              <a th:href="@{/admin/books}">View Books</a>
             </li>
             <li class="breadcrumb-item active">Create Book</li>
           </ol>
@@ -39,78 +40,112 @@
               <div class="col-md-6 col-12 mx-auto">
                 <h3>Create new Book</h3>
                 <hr />
-                <form method="post" action="/books/create" modelAttribute="newBook" class="row"
+                <form method="post" th:action="@{/admin/books/create}" th:object="${newBook}" class="row"
                   enctype="multipart/form-data">
 
                   <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Title:</label>
-                    <input type="text" class="form-control" path="title" />
+                    <input type="text" class="form-control" th:field="*{title}" />
                   </div>
-                  <div class="mb-3 col-12 col-md-12">
+
+                  <!-- <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Author:</label>
-                    <input type="text" class="form-control" path="author" />
+                    <input type="text" class="form-control" th:field="*{author}" />
+                  </div> -->
+
+                  <div class="mb-3 col-12 col-md-12">
+                    <label class="form-label">Authors:</label>
+                    <!-- If author list is empty -->
+                    <select class="form-select" th:if="${authorList == null or authorList.isEmpty()}">
+                      <option value="" selected disabled>
+                        -- No authors available --
+                      </option>
+                    </select>
+                    <!-- If author list isn't empty -->
+                    <select class="form-select" th:field="*{authors}" multiple="multiple" size="5" th:if="${authorList != null and !authorList.isEmpty()}">
+                      <option th:each="author : ${authorList}" th:value="${author.id}" th:text="${author.name}"></option>
+                    </select>
                   </div>
+
                   <div class="mb-3 col-12 col-md-8">
                     <label class="form-label">Publisher:</label>
-                    <input type="text" class="form-control" path="price" />
+                    <input type="text" class="form-control" th:field="*{publisher}" />
                   </div>
                   <div class="mb-3 col-12 col-md-4">
                     <label class="form-label">Publication Year:</label>
-                    <input type="number" class="form-control" path="stock" />
+                    <input type="number" class="form-control" th:field="*{publicationYear}" />
                   </div>
                   <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Short Description:</label>
-                    <input type="text" class="form-control" path="shortDesc" />
+                    <input type="text" class="form-control" th:field="*{shortDescription}" />
                   </div>
                   <div class="mb-3 col-12">
                     <label class="form-label">Detail Description:</label>
-                    <textarea type="text" class="form-control" path="detailDesc"></textarea>
+                    <textarea type="text" class="form-control" th:field="*{detailDescription}"></textarea>
                   </div>
                   <div class="mb-3 col-12 col-md-6">
                     <label class="form-label">Price:</label>
-                    <input type="number" class="form-control" path="stock" />
+                    <div class="input-group">
+                      <input type="number" class="form-control" th:field="*{price}" />
+                      <div class="input-group-text">VND</div>
+                    </div>
                   </div>
                   <div class="mb-3 col-12 col-md-6">
                     <label class="form-label">Stock:</label>
-                    <input type="number" class="form-control" path="stock" />
+                    <input type="number" class="form-control" th:field="*{stock}" />
                   </div>
-                  <div class="mb-3 col-12 col-md-6">
-                    <label class="form-label">Book Categories:</label>
-                    <select class="form-select" path="factory">
-                      <option value="FICTION">Fiction</option>
-                      <option value="NONFICTION">Non-Fiction</option>
-                      <option value="SCIENCE">Science</option>
-                      <option value="HISTORY">History</option>
-                      <option value="BIOGRAPHY">Biography</option>
-                      <option value="CHILDREN">Children's Books</option>
-                      <option value="BUSINESS">Business</option>
-                      <option value="HEALTH">Health</option>
-                      <option value="RELIGION">Religion</option>
-                      <option value="SELFHELP">Self-Help</option>
-                      <option value="HORROR">Horror</option>
-                      <option value="EDUCATION">Education</option>
-                      <option value="COMIC">Comic</option>
-                      <option value="NOVEL">Novel</option>
-                      <option value="LIGHTNOVEL">Light-Novel</option>
-                      <option value="FOOD">Food</option>
-                      <option value="COMEDY">Comedy</option>
-                      <option value="ROMANCE">Romance</option>
-                      <option value="POEM">Poem</option>
-                      <option value="LAW">Law</option>
-                      <option value="SPORT">Sport</option>
-                      <option value="PSYCHOLOGY">Psychology</option>
-                      <option value="PHILOSOPHY">Philosophy</option>
-                      <option value="MEDICAL">Medical</option>
-                      <option value="LITERATURE">Literature</option>
-                      <option value="LANGUAGE">Language</option>
-                      <option value="ANIMAL">Animal</option>
-                      <option value="TRAVEL">Travel</option>
-                      <option value="ART">Art</option>
-                      <option value="TECHNOLOGY">Technology</option>
-                      <option value="MYSTERY">Mystery</option>
-                      <option value="SOFT-SKILL">Soft-Skill</option>
+
+                  <div class="mb-3 col-12 col-md-12">
+                    <label class="form-label">Authors:</label>
+                    <!-- If author list is empty -->
+                    <select class="form-select" th:if="${bookCategoryList == null or bookCategoryList.isEmpty()}">
+                      <option value="" selected disabled>
+                        -- No Categories available --
+                      </option>
+                    </select>
+                    <!-- If author list isn't empty -->
+                    <select class="form-select" th:field="*{authors}" multiple="multiple" size="5" th:if="${bookCategoryList != null and !bookCategoryList.isEmpty()}">
+                      <option th:each="bookCategory : ${bookCategoryList}" th:value="${bookCategory.id}" th:text="${bookCategory.name}"></option>
                     </select>
                   </div>
+
+<!--                  <div class="mb-3 col-12 col-md-6">-->
+<!--                    <label class="form-label">Book Categories:</label>-->
+<!--                    <select class="form-select" th:field="*{bookCategory}">-->
+<!--                      <option value="FICTION">Fiction</option>-->
+<!--                      <option value="NONFICTION">Non-Fiction</option>-->
+<!--                      <option value="SCIENCE">Science</option>-->
+<!--                      <option value="HISTORY">History</option>-->
+<!--                      <option value="BIOGRAPHY">Biography</option>-->
+<!--                      <option value="CHILDREN">Children's Books</option>-->
+<!--                      <option value="BUSINESS">Business</option>-->
+<!--                      <option value="HEALTH">Health</option>-->
+<!--                      <option value="RELIGION">Religion</option>-->
+<!--                      <option value="SELFHELP">Self-Help</option>-->
+<!--                      <option value="HORROR">Horror</option>-->
+<!--                      <option value="EDUCATION">Education</option>-->
+<!--                      <option value="COMIC">Comic</option>-->
+<!--                      <option value="NOVEL">Novel</option>-->
+<!--                      <option value="LIGHTNOVEL">Light-Novel</option>-->
+<!--                      <option value="FOOD">Food</option>-->
+<!--                      <option value="COMEDY">Comedy</option>-->
+<!--                      <option value="ROMANCE">Romance</option>-->
+<!--                      <option value="POEM">Poem</option>-->
+<!--                      <option value="LAW">Law</option>-->
+<!--                      <option value="SPORT">Sport</option>-->
+<!--                      <option value="PSYCHOLOGY">Psychology</option>-->
+<!--                      <option value="PHILOSOPHY">Philosophy</option>-->
+<!--                      <option value="MEDICAL">Medical</option>-->
+<!--                      <option value="LITERATURE">Literature</option>-->
+<!--                      <option value="LANGUAGE">Language</option>-->
+<!--                      <option value="ANIMAL">Animal</option>-->
+<!--                      <option value="TRAVEL">Travel</option>-->
+<!--                      <option value="ART">Art</option>-->
+<!--                      <option value="TECHNOLOGY">Technology</option>-->
+<!--                      <option value="MYSTERY">Mystery</option>-->
+<!--                      <option value="SOFT-SKILL">Soft-Skill</option>-->
+<!--                    </select>-->
+<!--                  </div>-->
 
                   <!-- <div class="mb-3 col-12 col-md-6">
                     <label for="avatarFile" class="form-label">Product Image:</label>
@@ -121,8 +156,15 @@
                     <img style="max-height: 250px; display: none" alt="avatar preview" id="avatarPreview" />
                   </div> -->
 
-                  <div class="mb-5 col-12">
-                    <button type="submit" class="btn btn-outline-primary mb-5">Create</button>
+                  <div class="col-12">
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-outline-primary">Create</button>
+                    </div>
+                  </div>
+                  <div class="mt-3 mb-5 col-12">
+                    <div class="d-grid">
+                      <a class="btn btn-outline-success" th:href="@{/admin/books}" role="button">Back</a>
+                    </div>
                   </div>
 
                 </form>
