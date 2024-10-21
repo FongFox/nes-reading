@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ClientController {
-    @GetMapping("/")
+    @GetMapping("/home")
     public String getHomePage() {
         return "client/home";
     }
@@ -16,5 +16,11 @@ public class ClientController {
     public String getShopPage() {
         return "client/shop";
     }
+
+    @GetMapping("/single-product")
+    public String getSingleProductPage() {
+        return "client/single-product";
+    }
+
     
 }
