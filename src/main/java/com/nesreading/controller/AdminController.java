@@ -2,6 +2,7 @@ package com.nesreading.controller;
 
 import java.util.List;
 
+import com.nesreading.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.nesreading.domain.Author;
+import com.nesreading.domain.Book;
+import com.nesreading.domain.BookCategory;
 import com.nesreading.domain.User;
 import com.nesreading.service.AuthorService;
 import com.nesreading.service.UserService;
@@ -21,10 +22,12 @@ import com.nesreading.service.UserService;
 public class AdminController {
     private final UserService userService;
     private final AuthorService authorService;
+    private final BookService bookService;
 
-    public AdminController(UserService userService, AuthorService authorService) {
+    public AdminController(UserService userService, AuthorService authorService, BookService bookService) {
         this.userService = userService;
         this.authorService = authorService;
+        this.bookService = bookService;
     }
 
     // =============================== (Start) Dashboard Controller =====================================
@@ -159,42 +162,52 @@ public class AdminController {
 
     // =============================== (Start) Book Controller =====================================
     @GetMapping("/books")
-    public String getBookViewPage() {
+    public String getBookViewPage(Model model) {
         return "admin/book/view";
     }
 
     @GetMapping("/books/create")
-    public String getBookCreatePage() {
+    public String getBookCreatePage(Model model) {
+        List<Author> authorListAvailable = authorService.handleFetchAllAuthors();
+        List<BookCategory> bookCategoryList = null;
+        // List<BookCategory> bookCategoryList
+
+        model.addAttribute("authorList", authorListAvailable);
+        model.addAttribute("bookCategoryList", bookCategoryList);
+        model.addAttribute("newBook", new Book());
+
         return "admin/book/create";
     }
 
     @PostMapping("/books/create")
-    public String handleCreateBook() {
+    public String handleCreateBook(Model model, @ModelAttribute("newBook") Book book) {
+        bookService.handleSaveBook(book);
+
         return "redirect:/admin/books";
     }
 
     @GetMapping("/books/{id}")
-    public String getBookDetailPage() {
+    public String getBookDetailPage(Model model) {
         return "admin/book/detail";
     }
 
     @GetMapping("/books/update/{id}")
-    public String getBookUpdatePage() {
+    public String getBookUpdatePage(Model model) {
         return "admin/book/update";
     }
 
     @PostMapping("/books/update/{id}")
-    public String handleUpdateBook() {
+    public String handleUpdateBook(Model model) {
         return "redirect:/admin/books";
     }
 
     @GetMapping("/books/delete/{id}")
-    public String getBookDeletePage() {
+    public String getBookDeletePage(Model model) {
         return "admin/book/delete";
     }
 
     @PostMapping("/books/delete/{id}")
-    public String handleDeleteBook() {
+    public String handleDeleteBook(Model model) {
         return "redirect:/admin/books";
     }
     // =============================== (End) Book Controller ========================================

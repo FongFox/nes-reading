@@ -1,6 +1,7 @@
 package com.nesreading.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,8 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -31,8 +31,11 @@ public class Author {
   @UpdateTimestamp
   private LocalDateTime updateAt;
 
-  @OneToMany(mappedBy = "author")
-  private List<BookAuthor> bookAuthors;
+  // @OneToMany(mappedBy = "author")
+  // private List<BookAuthor> bookAuthors;
+
+  @ManyToMany(mappedBy = "authors")
+  private List<Book> books = new ArrayList<>();
 
   public long getId() {
     return id;
@@ -74,19 +77,23 @@ public class Author {
     this.updateAt = updateAt;
   }
 
-  public List<BookAuthor> getBookAuthors() {
-    return bookAuthors;
+  public List<Book> getBooks() {
+    return books;
   }
 
-  public void setBookAuthors(List<BookAuthor> bookAuthors) {
-    this.bookAuthors = bookAuthors;
+  public void setBooks(List<Book> books) {
+    this.books = books;
   }
 
   @Override
   public String toString() {
-    return "Author [id=" + id + ", fullName=" + fullName + ", shortDescription=" + shortDescription + ", createAt="
-        + createAt + ", updateAt=" + updateAt + ", bookAuthors=" + bookAuthors + "]";
+    return "Author{" +
+            "id=" + id +
+            ", fullName='" + fullName + '\'' +
+            ", shortDescription='" + shortDescription + '\'' +
+            ", createAt=" + createAt +
+            ", updateAt=" + updateAt +
+            ", books=" + books +
+            '}';
   }
-
-  
 }
