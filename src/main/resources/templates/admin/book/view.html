@@ -24,9 +24,10 @@
       <main>
         <div class="container-fluid px-4">
           <h1 class="mt-4">Books Management</h1>
+          <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
-              <a th:href="@{/}">Dashboard</a>
+              <a th:href="@{/admin}">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">View Books</li>
           </ol>
@@ -36,7 +37,7 @@
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
                   <h3>Table Books</h3>
-                  <a type="button" class="btn btn-outline-primary" th:href="@{/books/create}">
+                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/books/create}">
                     Add New Book
                   </a>
                 </div>
@@ -49,8 +50,6 @@
                       <th scope="col">Author</th>
                       <th scope="col">Publisher</th>
                       <th scope="col">Short Description</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Stock</th>
                       <th scope="col" colspan="3">Action</th>
                     </tr>
                   </thead>
@@ -61,20 +60,18 @@
                       <td>Book author</td>
                       <td>Book Publisher</td>
                       <td>This is book short description.</td>
-                      <td>10.000 VND</td>
-                      <td>10</td>
                       <td>
-                        <a th:href="@{/books/1}" type="button" class="btn btn-outline-success">
+                        <a th:href="@{/admin/books/1}" type="button" class="btn btn-outline-success">
                           View
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/books/update/1}" type="button" class="btn btn-outline-warning">
+                        <a th:href="@{/admin/books/update/1}" type="button" class="btn btn-outline-warning">
                           Update
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/books/delete/1}" type="button" class="btn btn-outline-danger">
+                        <a th:href="@{/admin/books/delete/1}" type="button" class="btn btn-outline-danger">
                           Delete
                         </a>
                       </td>
