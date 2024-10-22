@@ -54,24 +54,36 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Book title</td>
-                      <td>Book author</td>
-                      <td>Book Publisher</td>
-                      <td>This is book short description.</td>
+                    <!-- If list of book null -->
+                    <tr th:if="${bookList == null or bookList.isEmpty()}">
+                      <td colspan="8">Nothing in this list!</td>
+                    </tr>
+                    <!-- If list of book available -->
+                    <tr th:if="${bookList != null and !bookList.isEmpty()}" th:each="book : ${bookList}">
+                      <td th:text="${book.id}"></td>
+                      <td th:text="${book.title}"></td>
+                      <!-- If list of book.authors is null -->
+                      <td th:if="${book.authors == null or book.authors.isEmpty()}">Updating</td>
+                      <!-- If list of book.authors available -->
+                      <td th:if="${book.authors != null and !book.authors.isEmpty()}">
+                        <ul th:each="author : ${book.authors}">
+                          <li th:text="${author.name}"></li>
+                        </ul>
+                      </td>
+                      <td th:text="${book.publisher}"></td>
+                      <td th:text="${book.shortDescription}"></td>
                       <td>
-                        <a th:href="@{/admin/books/1}" type="button" class="btn btn-outline-success">
+                        <a th:href="@{/admin/books/{id}(id=${book.id})}" type="button" class="btn btn-outline-success">
                           View
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/admin/books/update/1}" type="button" class="btn btn-outline-warning">
+                        <a th:href="@{/admin/books/update/{id}(id=${book.id})}" type="button" class="btn btn-outline-warning">
                           Update
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/admin/books/delete/1}" type="button" class="btn btn-outline-danger">
+                        <a th:href="@{/admin/books/delete/{id}(id=${book.id})}" type="button" class="btn btn-outline-danger">
                           Delete
                         </a>
                       </td>

@@ -47,12 +47,7 @@
                     <label class="form-label">Title:</label>
                     <input type="text" class="form-control" th:field="*{title}" />
                   </div>
-
-                  <!-- <div class="mb-3 col-12 col-md-12">
-                    <label class="form-label">Author:</label>
-                    <input type="text" class="form-control" th:field="*{author}" />
-                  </div> -->
-
+                  
                   <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Authors:</label>
                     <!-- If author list is empty -->
@@ -63,7 +58,7 @@
                     </select>
                     <!-- If author list isn't empty -->
                     <select class="form-select" th:field="*{authors}" multiple="multiple" size="5" th:if="${authorList != null and !authorList.isEmpty()}">
-                      <option th:each="author : ${authorList}" th:value="${author.id}" th:text="${author.name}"></option>
+                      <option th:each="author : ${authorList}" th:value="${author.id}" th:text="${author.fullName}"></option>
                     </select>
                   </div>
 
@@ -96,7 +91,7 @@
                   </div>
 
                   <div class="mb-3 col-12 col-md-12">
-                    <label class="form-label">Authors:</label>
+                    <label class="form-label">Book Categories:</label>
                     <!-- If author list is empty -->
                     <select class="form-select" th:if="${bookCategoryList == null or bookCategoryList.isEmpty()}">
                       <option value="" selected disabled>
@@ -104,7 +99,7 @@
                       </option>
                     </select>
                     <!-- If author list isn't empty -->
-                    <select class="form-select" th:field="*{authors}" multiple="multiple" size="5" th:if="${bookCategoryList != null and !bookCategoryList.isEmpty()}">
+                    <select class="form-select" th:if="${bookCategoryList != null and !bookCategoryList.isEmpty()}" th:field="*{bookCategory}" multiple="multiple" size="2">
                       <option th:each="bookCategory : ${bookCategoryList}" th:value="${bookCategory.id}" th:text="${bookCategory.name}"></option>
                     </select>
                   </div>

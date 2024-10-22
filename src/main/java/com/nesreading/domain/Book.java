@@ -142,20 +142,20 @@ public class Book {
     this.image = image;
   }
 
-  public LocalDateTime getCreateAt() {
-    return createAt;
-  }
-
-  public void setCreateAt(LocalDateTime createAt) {
-    this.createAt = createAt;
-  }
-
   public int getStatus() {
     return status;
   }
 
   public void setStatus(int status) {
     this.status = status;
+  }
+
+  public LocalDateTime getCreateAt() {
+    return createAt;
+  }
+
+  public void setCreateAt(LocalDateTime createAt) {
+    this.createAt = createAt;
   }
 
   public LocalDateTime getUpdateAt() {
@@ -208,25 +208,12 @@ public class Book {
 
   @Override
   public String toString() {
-    return "Book{" +
-            "id=" + id +
-            ", title='" + title + '\'' +
-            ", publisher='" + publisher + '\'' +
-            ", publicationYear=" + publicationYear +
-            ", shortDescription='" + shortDescription + '\'' +
-            ", detailDescription='" + detailDescription + '\'' +
-            ", price=" + price +
-            ", sold=" + sold +
-            ", stock=" + stock +
-            ", image='" + image + '\'' +
-            ", status=" + status +
-            ", createAt=" + createAt +
-            ", updateAt=" + updateAt +
-            ", bookReviews=" + bookReviews +
-            ", bookCategory=" + bookCategory +
-            ", cartDetails=" + cartDetails +
-            ", orderDetails=" + orderDetails +
-            ", authors=" + authors +
-            '}';
+    return "Book [id=" + id + ", title=" + title + ", publisher=" + publisher + ", publicationYear=" + publicationYear
+        + ", shortDescription=" + shortDescription + ", detailDescription=" + detailDescription + ", price=" + price
+        + ", sold=" + sold + ", stock=" + stock + ", image=" + image + ", status=" + status + ", createAt=" + createAt
+        + ", updateAt=" + updateAt + ", bookReviews=" + bookReviews + ", bookCategory=" + bookCategory
+        + ", cartDetails=" + cartDetails + ", orderDetails=" + orderDetails + ", authors=" + authors + "]";
   }
+
+  
 }

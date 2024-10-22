@@ -163,6 +163,10 @@ public class AdminController {
     // =============================== (Start) Book Controller =====================================
     @GetMapping("/books")
     public String getBookViewPage(Model model) {
+        List<Book> bookList = bookService.handleFetchAllBooks();
+
+        model.addAttribute("bookList", bookList);
+
         return "admin/book/view";
     }
 
@@ -187,17 +191,33 @@ public class AdminController {
     }
 
     @GetMapping("/books/{id}")
-    public String getBookDetailPage(Model model) {
+    public String getBookDetailPage(Model model, @PathVariable long id) {
+        Book book = bookService.handleFetchBookById(id).orElse(null);
+        
+        if(book == null) {
+            return "redirect:/admin/books";
+        }
+
+        model.addAttribute("book", book);
+
         return "admin/book/detail";
     }
 
     @GetMapping("/books/update/{id}")
-    public String getBookUpdatePage(Model model) {
+    public String getBookUpdatePage(Model model, @PathVariable long id) {
+        Book tempBook = bookService.handleFetchBookById(id).orElse(null);
+
+        if (tempBook == null) {
+            return "redirect:/admin/books";
+        }
+
+        model.addAttribute("tempBook", tempBook);
+
         return "admin/book/update";
     }
 
     @PostMapping("/books/update/{id}")
-    public String handleUpdateBook(Model model) {
+    public String handleUpdateBook(Model model, @ModelAttribute("tempBook") Book book) {
         return "redirect:/admin/books";
     }
 

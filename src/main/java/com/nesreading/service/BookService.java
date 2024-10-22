@@ -36,4 +36,12 @@ public class BookService {
     public Optional<Book> handleFetchBookById(long id) {
         return bookRepository.findById(id);
     }
+
+    public Book handleUpdateBook(Book book) {
+        Book dbBook = bookRepository.findById(book.getId()).get();
+
+        
+
+        return bookRepository.save(dbBook);
+    }
 }

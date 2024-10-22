@@ -24,12 +24,13 @@
       <main>
         <div class="container-fluid px-4">
           <h1 class="mt-4">Books Management</h1>
+          <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
-              <a href="/">Dashboard</a>
+              <a href="/admin">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="/books">View Books</a>
+              <a href="/admin/books">View Books</a>
             </li>
             <li class="breadcrumb-item active">Update Book</li>
           </ol>
@@ -39,44 +40,81 @@
               <div class="col-md-6 col-12 mx-auto">
                 <h3>Update new Book</h3>
                 <hr />
-                <form method="post" action="/books/update" modelAttribute="newBook" class="row"
+                <form method="post" th:action="@{/books/update}" th:object="${tempBook}" class="row"
                   enctype="multipart/form-data">
-
+                  <div class="mb-3 col-12 col-md-12 d-none">
+                    <label class="form-label">Id:</label>
+                    <input type="text" class="form-control" th:field="*{id}" />
+                  </div>
                   <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Title:</label>
-                    <input type="text" class="form-control" path="title" />
+                    <input type="text" class="form-control" th:field="*{title}" />
                   </div>
-                  <div class="mb-3 col-12 col-md-12">
+
+                  <!-- <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Author:</label>
-                    <input type="text" class="form-control" path="author" />
+                    <input type="text" class="form-control" th:field="*{author}" />
+                  </div> -->
+                  <div class="mb-3 col-12 col-md-12">
+                    <label class="form-label">Authors:</label>
+                    <!-- If author list is empty -->
+                    <select class="form-select" th:if="${authors == null or authors.isEmpty()}">
+                      <option value="" selected disabled>
+                        -- No authors available --
+                      </option>
+                    </select>
+                    <!-- If author list isn't empty -->
+                    <select class="form-select" th:field="*{authors}" multiple="multiple" size="2"
+                      th:if="${authors != null and !authors.isEmpty()}">
+                      <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
+                    </select>
                   </div>
+
                   <div class="mb-3 col-12 col-md-8">
                     <label class="form-label">Publisher:</label>
-                    <input type="text" class="form-control" path="price" />
+                    <input type="text" class="form-control" th:field="*{publisher}" />
                   </div>
                   <div class="mb-3 col-12 col-md-4">
                     <label class="form-label">Publication Year:</label>
-                    <input type="number" class="form-control" path="stock" />
+                    <input type="number" class="form-control" th:field="*{publicationYear}" />
                   </div>
                   <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Short Description:</label>
-                    <input type="text" class="form-control" path="shortDesc" />
+                    <input type="text" class="form-control" th:field="*{shortDescription}" />
                   </div>
                   <div class="mb-3 col-12">
                     <label class="form-label">Detail Description:</label>
-                    <textarea type="text" class="form-control" path="detailDesc"></textarea>
+                    <textarea type="text" class="form-control" th:field="*{detailDescription}"></textarea>
                   </div>
                   <div class="mb-3 col-12 col-md-6">
                     <label class="form-label">Price:</label>
-                    <input type="number" class="form-control" path="stock" />
+                    <input type="number" class="form-control" th:field="*{price}" /> VND
                   </div>
                   <div class="mb-3 col-12 col-md-6">
                     <label class="form-label">Stock:</label>
-                    <input type="number" class="form-control" path="stock" />
+                    <input type="number" class="form-control" th:field="*{stock}" />
                   </div>
-                  <div class="mb-3 col-12 col-md-6">
+
+                  <div class="mb-3 col-12 col-md-12">
                     <label class="form-label">Book Categories:</label>
-                    <select class="form-select" path="factory">
+                    <!-- If book category is empty -->
+                    <select class="form-select" 
+                            th:if="${(bookCategory == null or bookCategory.isEmpty()) and (bookCategoryList == null or bookCategoryList.isEmpty())}">
+                      <option value="" selected disabled>
+                        -- No Categories available --
+                      </option>
+                    </select>
+                    <!-- If book category isn't empty -->
+                    <select class="form-select" th:if="${(bookCategory != null and !bookCategory.isEmpty()) and (bookCategoryList != null and !bookCategoryList.isEmpty())}"
+                      th:field="*{bookCategory}" multiple="multiple" size="2">
+                      <option th:each="bookCategory : ${bookCategoryList}" th:value="${bookCategory.id}" th:text="${bookCategory.name}">
+                      </option>
+                    </select>
+                  </div>
+
+                  <!-- <div class="mb-3 col-12 col-md-6">
+                    <label class="form-label">Book Categories:</label>
+                    <select class="form-select" th:field="*{factory}">
                       <option value="FICTION">Fiction</option>
                       <option value="NONFICTION">Non-Fiction</option>
                       <option value="SCIENCE">Science</option>
@@ -87,7 +125,7 @@
                       <option value="HEALTH">Health</option>
                       <option value="RELIGION">Religion</option>
                     </select>
-                  </div>
+                  </div> -->
 
                   <!-- <div class="mb-3 col-12 col-md-6">
                     <label for="avatarFile" class="form-label">Product Image:</label>
@@ -99,7 +137,7 @@
                   </div> -->
 
                   <div class="mb-5 col-12">
-                    <button type="submit" class="btn btn-outline-primary mb-5">Create</button>
+                    <button type="submit" class="btn btn-outline-primary mb-5">Update Information</button>
                   </div>
 
                 </form>
