@@ -1,55 +1,61 @@
-# Miscellaneous
-*.java.hsp
-*.sonarj
-*.sw*
-.DS_Store
-build.sh
-integration-repo
-ivy-cache
-argfile*
-activemq-data/
-classes/
+# Maven and Gradle
+/.mvn/
+/.gradle/
+target/
+build/
 
-# Log files
-jxl.log
-jmx.log
-derby.log
+# IntelliJ IDEA
+/.idea/
+/*.iml
 
-# Gradle artifacts
-.gradle
-.gradletasknamecache
-/build
-buildSrc/build
-/spring-*/build
-/framework-*/build
-/integration-tests/build
-/src/asciidoc/build
-spring-test/test-output/
-
-# Maven artifacts
-# pom.xml
-/target/
-
-# Eclipse artifacts, including WTP generated manifests
-bin
-.classpath
+# Eclipse
 .project
-.settings
-.springBeans
-spring-*/src/main/java/META-INF/MANIFEST.MF
+.classpath
+.settings/
 
-# IDEA artifacts and output dirs
-*.iml
-*.ipr
-*.iws
-.idea
-out
-test-output
-atlassian-ide-plugin.xml
+# NetBeans
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-# VS Code
-.vscode/
+# Logs
+*.log
+logs/
 
-cached-antora-playbook.yml
+# OS specific files
+.DS_Store
+Thumbs.db
 
-node_modules
+# Compiled files
+*.class
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Spring Boot properties and secrets
+**/application.properties
+**/application.yml
+**/application-*.properties
+**/application-*.yml
+
+# Local environment settings
+.env
+
+# Test reports
+/test-output/
+*.out
+*.xml
+
+# Database and backups
+*.db
+*.sql
+*.sqlite
+*.bak
+
+# Node modules (in case of frontend integration)
+node_modules/
