@@ -64,3 +64,6 @@ node_modules/
 ### VS Code ###
 .vscode/
 .metadata
+
+# Other
+.factorypath
