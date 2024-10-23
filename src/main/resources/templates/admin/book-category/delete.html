@@ -29,7 +29,7 @@
               <a th:href="@{/admin}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-              <a th:href="@{/admin/categories}">View Categories</a>
+              <a th:href="@{/admin/book-categories}">View Categories</a>
             </li>
             <li class="breadcrumb-item active">Category Detail</li>
           </ol>
@@ -44,12 +44,12 @@
                 <div class="alert alert-danger" role="alert">
                   Are you sure want to delete this Category ?
                 </div>
-                <form method="post" th:action="@{/admin/categories/delete}" th:object="${tempBookCategory}">
+                <form method="post" th:action="@{/admin/book-categories/delete}" th:object="${tempBookCategory}">
                   <div class="mb-3 d-none">
                     <label class="form-label">Id:</label>
                     <input type="text" class="form-control" th:field="*{id}" />
                   </div>
-                  <a class="btn btn-outline-success" th:href="@{/admin/categories}" role="button">Back</a>
+                  <a class="btn btn-outline-success" th:href="@{/admin/book-categories}" role="button">Back</a>
                   <button type="submit" class="btn btn-outline-danger">Delete</button>
                 </form>
               </div>

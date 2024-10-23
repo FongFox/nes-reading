@@ -9,8 +9,6 @@ import com.nesreading.domain.Book;
 import com.nesreading.domain.BookCategory;
 import com.nesreading.repository.BookCategoryRepository;
 
-
-
 @Service
 public class BookCategoryService {
     private final BookCategoryRepository bookCategoryRepository;

@@ -23,7 +23,7 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Categories Management</h1>
+          <h1 class="mt-4">Book Categories Management</h1>
           <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
@@ -36,8 +36,8 @@
             <div class="row">
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
-                  <h3>Table Categories</h3>
-                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/categories/create}">
+                  <h3>Table Book Categories</h3>
+                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/book-categories/create}">
                     Add New Category
                   </a>
                 </div>
@@ -61,12 +61,12 @@
                       <td th:text="${bookCategory.name}"></td>
                       <td th:text="${bookCategory.shortDescription}"></td>
                       <td>
-                        <a th:href="@{/admin/categories/update/{id}(id=${bookCategory.id})}" type="button" class="btn btn-outline-warning">
+                        <a th:href="@{/admin/book-categories/update/{id}(id=${bookCategory.id})}" type="button" class="btn btn-outline-warning">
                           Update
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/admin/categories/delete/{id}(id=${bookCategory.id})}" type="button" class="btn btn-outline-danger">
+                        <a th:href="@{/admin/book-categories/delete/{id}(id=${bookCategory.id})}" type="button" class="btn btn-outline-danger">
                           Delete
                         </a>
                       </td>
