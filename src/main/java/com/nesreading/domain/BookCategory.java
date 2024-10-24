@@ -31,4 +31,54 @@ public class BookCategory {
 
   @OneToMany(mappedBy = "bookCategory")
   private List<Book> books;
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getShortDescription() {
+    return shortDescription;
+  }
+
+  public void setShortDescription(String shortDescription) {
+    this.shortDescription = shortDescription;
+  }
+
+  public LocalDateTime getCreateAt() {
+    return createAt;
+  }
+
+  public void setCreateAt(LocalDateTime createAt) {
+    this.createAt = createAt;
+  }
+
+  public LocalDateTime getUpdateAt() {
+    return updateAt;
+  }
+
+  public void setUpdateAt(LocalDateTime updateAt) {
+    this.updateAt = updateAt;
+  }
+
+  public List<Book> getBooks() {
+    return books;
+  }
+
+  public void setBooks(List<Book> books) {
+    this.books = books;
+  }
+
+  
 }

@@ -15,6 +15,7 @@ import com.nesreading.domain.Book;
 import com.nesreading.domain.BookCategory;
 import com.nesreading.domain.User;
 import com.nesreading.service.AuthorService;
+import com.nesreading.service.BookCategoryService;
 import com.nesreading.service.UserService;
 
 @Controller
@@ -22,11 +23,13 @@ import com.nesreading.service.UserService;
 public class AdminController {
     private final UserService userService;
     private final AuthorService authorService;
+    private final BookCategoryService bookCategoryService;
     private final BookService bookService;
 
-    public AdminController(UserService userService, AuthorService authorService, BookService bookService) {
+    public AdminController(UserService userService, AuthorService authorService, BookCategoryService bookCategoryService, BookService bookService) {
         this.userService = userService;
         this.authorService = authorService;
+        this.bookCategoryService = bookCategoryService;
         this.bookService = bookService;
     }
 
@@ -163,6 +166,10 @@ public class AdminController {
     // =============================== (Start) Book Controller =====================================
     @GetMapping("/books")
     public String getBookViewPage(Model model) {
+        List<Book> bookList = bookService.handleFetchAllBooks();
+
+        model.addAttribute("bookList", bookList);
+
         return "admin/book/view";
     }
 
@@ -187,17 +194,33 @@ public class AdminController {
     }
 
     @GetMapping("/books/{id}")
-    public String getBookDetailPage(Model model) {
+    public String getBookDetailPage(Model model, @PathVariable long id) {
+        Book book = bookService.handleFetchBookById(id).orElse(null);
+        
+        if(book == null) {
+            return "redirect:/admin/books";
+        }
+
+        model.addAttribute("book", book);
+
         return "admin/book/detail";
     }
 
     @GetMapping("/books/update/{id}")
-    public String getBookUpdatePage(Model model) {
+    public String getBookUpdatePage(Model model, @PathVariable long id) {
+        Book tempBook = bookService.handleFetchBookById(id).orElse(null);
+
+        if (tempBook == null) {
+            return "redirect:/admin/books";
+        }
+
+        model.addAttribute("tempBook", tempBook);
+
         return "admin/book/update";
     }
 
     @PostMapping("/books/update/{id}")
-    public String handleUpdateBook(Model model) {
+    public String handleUpdateBook(Model model, @ModelAttribute("tempBook") Book book) {
         return "redirect:/admin/books";
     }
 
@@ -211,6 +234,64 @@ public class AdminController {
         return "redirect:/admin/books";
     }
     // =============================== (End) Book Controller ========================================
+
+    // =============================== (Start) Category List Controller =====================================
+    
+    @GetMapping("/book-categories")
+    public String getCategoryViewPage(Model model) {
+        List<BookCategory> bookCategoryList = bookCategoryService.handleFetchAllBookCategories();
+
+        model.addAttribute("bookCategoryList", bookCategoryList);
+
+        return "admin/book-category/view";
+    }
+    
+    @GetMapping("/book-categories/create")
+    public String getCategoryCreatePage(Model model) {
+        model.addAttribute("newBookCategory", new BookCategory());
+        return "admin/book-category/create";
+    }
+
+    @PostMapping("/book-categories/create")
+    public String handleCreateCategory(@ModelAttribute("tempCategory") BookCategory bookCategory) {
+        // System.out.println(category.toString());
+        bookCategoryService.handleCreateBookCategory(bookCategory);
+        return "redirect:/admin/book-categories";
+    }
+
+    @GetMapping("/book-categories/update/{id}")
+    public String getBookCategoryUpdatePage(@PathVariable long id ,Model model) {
+        BookCategory bookCategory = bookCategoryService.handleFetchBookCategoryById(id).orElse(null);
+        if(bookCategory == null) {
+            return "redirect:/admin/book-categories";
+        }
+        model.addAttribute("tempBookCategory", bookCategory);
+        return "admin/book-category/update";
+    }
+
+    @PostMapping("/book-categories/update")
+    public String handleUpdateBookCategory(@ModelAttribute("tempBookCategory") BookCategory bookCategory) {
+        bookCategoryService.handleUpdateBookCategory(bookCategory);
+        return "redirect:/admin/book-categories";
+    }
+
+    @GetMapping("/book-categories/delete/{id}")
+    public String getBookCategoryDeletePage(@PathVariable long id ,Model model) {
+        BookCategory bookCategory = bookCategoryService.handleFetchBookCategoryById(id).get();
+        if(bookCategory == null) {
+            return "redirect:/admin/book-categories";
+        }
+        model.addAttribute("tempBookCategory", bookCategory);
+        return "admin/book-category/delete";
+    }
+
+        @PostMapping("/book-categories/delete")
+        public String handleDeleteBookCategory(@ModelAttribute("tempBookCategory") BookCategory bookCategory) {
+            bookCategoryService.handleDeleteBookCategory(bookCategory.getId());
+        return "redirect:/admin/book-categories";
+    
+    }
+    // =============================== (End) Category List Controller =====================================
 
     // =============================== (Start) Order Controller =====================================
     @GetMapping("/orders")

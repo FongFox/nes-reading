@@ -24,12 +24,13 @@
       <main>
         <div class="container-fluid px-4">
           <h1 class="mt-4">Books Management</h1>
+          <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
-              <a th:href="@{/}">Dashboard</a>
+              <a th:href="@{/admin}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-              <a th:href="@{/books}">View Books</a>
+              <a th:href="@{/admin/books}">View Books</a>
             </li>
             <li class="breadcrumb-item active">Book Detail</li>
           </ol>
@@ -50,40 +51,40 @@
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item d-none">
-                      Id: 1
+                      Id: <span th:text="${book.id}"></span>
                     </li>
                     <li class="list-group-item">
-                      Title: Book title
+                      Title: <span th:text="${book.title}"></span>
                     </li>
                     <li class="list-group-item">
                       Author: Book author
                     </li>
                     <li class="list-group-item">
-                      Publisher: Book Publisher
+                      Publisher: <span th:text="${book.publisher}"></span>
                     </li>
                     <li class="list-group-item">
-                      Publication Year: 2000
+                      Publication Year: <span th:text="${book.publicationYear}"></span>
                     </li>
                     <li class="list-group-item">
-                      Short Description: Book short desc.
+                      Short Description: <span th:text="${book.shortDescription}"></span>
                     </li>
                     <li class="list-group-item">
-                      Detail Description: This is book description.
+                      Detail Description: <span th:text="${book.detailDescription}"></span>
                     </li>
                     <li class="list-group-item">
-                      Price: 1000 VND
+                      Price: <span th:text="${book.price}"></span> VND
                     </li>
                     </li>
                     <li class="list-group-item">
-                      Stock: 10
+                      Stock: <span th:text="${book.stock}"></span>
                     </li>
                     <li class="list-group-item">
-                      Sold: 2
+                      Sold: <span th:text="${book.sold}"></span>
                     </li>
                   </ul>
                 </div>
                 <div class="mt-3 mb-3">
-                  <a th:href="@{/books}" type="button" class="btn btn-outline-success">
+                  <a th:href="@{/admin/books}" type="button" class="btn btn-outline-success">
                     Back
                   </a>
                 </div>

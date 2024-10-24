@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
-  <meta name="author" content="" />
+  <meta name="category" content="" />
   <title>NesReading - Admin</title>
   <link th:href="@{https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css}" rel="stylesheet" />
   <link th:href="@{/styles/admin/style.css}" rel="stylesheet" />
@@ -23,22 +23,22 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Books Management</h1>
+          <h1 class="mt-4">Book Categories Management</h1>
           <!-- Breadcrumb -->
           <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
               <a th:href="@{/admin}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">View Books</li>
+            <li class="breadcrumb-item active">View Book Categories</li>
           </ol>
 
           <div class="mt-5">
             <div class="row">
               <div class="col-12 mx-auto">
                 <div class="d-flex justify-content-between">
-                  <h3>Table Books</h3>
-                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/books/create}">
-                    Add New Book
+                  <h3>Table Book Categories</h3>
+                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/book-categories/create}">
+                    Add New Category
                   </a>
                 </div>
                 <hr />
@@ -46,44 +46,27 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Author</th>
-                      <th scope="col">Publisher</th>
+                      <th scope="col">Category</th>
                       <th scope="col">Short Description</th>
-                      <th scope="col" colspan="3">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- If list of book null -->
-                    <tr th:if="${bookList == null or bookList.isEmpty()}">
+
+                    <tr th:if="${bookCategoryList == null or bookCategoryList.isEmpty()}"> 
                       <td colspan="8">Nothing in this list!</td>
                     </tr>
-                    <!-- If list of book available -->
-                    <tr th:if="${bookList != null and !bookList.isEmpty()}" th:each="book : ${bookList}">
-                      <td th:text="${book.id}"></td>
-                      <td th:text="${book.title}"></td>
-                      <!-- If list of book.authors is null -->
-                      <td th:if="${book.authors == null or book.authors.isEmpty()}">Updating</td>
-                      <!-- If list of book.authors available -->
-                      <td th:if="${book.authors != null and !book.authors.isEmpty()}">
-                        <ul th:each="author : ${book.authors}">
-                          <li th:text="${author.name}"></li>
-                        </ul>
-                      </td>
-                      <td th:text="${book.publisher}"></td>
-                      <td th:text="${book.shortDescription}"></td>
+
+                    <tr th:each="bookCategory : ${bookCategoryList}">
+                      <td th:text="${bookCategory.id}"></td>
+                      <td th:text="${bookCategory.name}"></td>
+                      <td th:text="${bookCategory.shortDescription}"></td>
                       <td>
-                        <a th:href="@{/admin/books/{id}(id=${book.id})}" type="button" class="btn btn-outline-success">
-                          View
-                        </a>
-                      </td>
-                      <td>
-                        <a th:href="@{/admin/books/update/{id}(id=${book.id})}" type="button" class="btn btn-outline-warning">
+                        <a th:href="@{/admin/book-categories/update/{id}(id=${bookCategory.id})}" type="button" class="btn btn-outline-warning">
                           Update
                         </a>
                       </td>
                       <td>
-                        <a th:href="@{/admin/books/delete/{id}(id=${book.id})}" type="button" class="btn btn-outline-danger">
+                        <a th:href="@{/admin/book-categories/delete/{id}(id=${bookCategory.id})}" type="button" class="btn btn-outline-danger">
                           Delete
                         </a>
                       </td>
