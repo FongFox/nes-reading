@@ -1,0 +1,69 @@
+# Maven and Gradle
+/.mvn/
+/.gradle/
+target/
+build/
+/target/
+
+# IntelliJ IDEA
+/.idea/
+/*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# NetBeans
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Logs
+*.log
+logs/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Compiled files
+*.class
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Spring Boot properties and secrets
+**/application.properties
+**/application.yml
+**/application-*.properties
+**/application-*.yml
+
+# Local environment settings
+.env
+
+# Test reports
+/test-output/
+*.out
+*.xml
+
+# Database and backups
+*.db
+*.sql
+*.sqlite
+*.bak
+
+# Node modules (in case of frontend integration)
+node_modules/
+
+### VS Code ###
+.vscode/
+.metadata
+
+# Other
+.factorypath

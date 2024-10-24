@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>NesReading - Admin</title>
+  <link th:href="@{https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css}" rel="stylesheet" />
+  <link th:href="@{/styles/admin/style.css}" rel="stylesheet" />
+</head>
+
+<body class="sb-nav-fixed">
+
+  <nav th:replace="~{layouts/admin-layout :: navbar}"></nav>
+
+  <div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+      <nav th:replace="~{layouts/admin-layout :: sidebar}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+      <main>
+        <div class="container-fluid px-4">
+          <h1 class="mt-4">Books Management</h1>
+          <!-- Breadcrumb -->
+          <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item">
+              <a th:href="@{/admin}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">View Books</li>
+          </ol>
+
+          <div class="mt-5">
+            <div class="row">
+              <div class="col-12 mx-auto">
+                <div class="d-flex justify-content-between">
+                  <h3>Table Books</h3>
+                  <a type="button" class="btn btn-outline-primary" th:href="@{/admin/books/create}">
+                    Add New Book
+                  </a>
+                </div>
+                <hr />
+                <table class="table table-bordered table-hover text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Author</th>
+                      <th scope="col">Publisher</th>
+                      <th scope="col">Short Description</th>
+                      <th scope="col" colspan="3">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- If list of book null -->
+                    <tr th:if="${bookList == null or bookList.isEmpty()}">
+                      <td colspan="8">Nothing in this list!</td>
+                    </tr>
+                    <!-- If list of book available -->
+                    <tr th:if="${bookList != null and !bookList.isEmpty()}" th:each="book : ${bookList}">
+                      <td th:text="${book.id}"></td>
+                      <td th:text="${book.title}"></td>
+                      <!-- If list of book.authors is null -->
+                      <td th:if="${book.authors == null or book.authors.isEmpty()}">Updating</td>
+                      <!-- If list of book.authors available -->
+                      <td th:if="${book.authors != null and !book.authors.isEmpty()}">
+                        <ul th:each="author : ${book.authors}">
+                          <li th:text="${author.name}"></li>
+                        </ul>
+                      </td>
+                      <td th:text="${book.publisher}"></td>
+                      <td th:text="${book.shortDescription}"></td>
+                      <td>
+                        <a th:href="@{/admin/books/{id}(id=${book.id})}" type="button" class="btn btn-outline-success">
+                          View
+                        </a>
+                      </td>
+                      <td>
+                        <a th:href="@{/admin/books/update/{id}(id=${book.id})}" type="button" class="btn btn-outline-warning">
+                          Update
+                        </a>
+                      </td>
+                      <td>
+                        <a th:href="@{/admin/books/delete/{id}(id=${book.id})}" type="button" class="btn btn-outline-danger">
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Scripts Link CDN -->
+  <script th:src="@{https://use.fontawesome.com/releases/v6.3.0/js/all.js}" crossorigin="anonymous"></script>
+  <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"
+          crossorigin="anonymous"></script>
+  <!-- Scripts Link Source Code -->
+  <script th:src="@{/scripts/admin/scripts.js}"></script>
+</body>
+
+</html>
